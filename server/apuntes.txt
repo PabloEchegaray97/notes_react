@@ -1,0 +1,12 @@
+comandos base de datos mongo
+para usar en CMD -> 
+    $mongod
+    $mongo
+luego ->
+    $show dbs
+para meterse en una base de datos
+    $use base_de_datos_de_ej
+para insertar un objeto ->
+    $db.notes.insert({title: "title_test", content: "content_test"})
+para buscar objetos en la base de datos ->
+    $db.base_de_datos_de_ej.find()
