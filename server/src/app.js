@@ -18,7 +18,7 @@ app.set('PORT', 3000)
 //middleware
 app.use(morgan('dev'))
 app.use(express.json())
-app.use(cors({origin:['http://localhost:3000']}))
+app.use(cors())
 //routes
 app.use('/api/', router)
 //server
