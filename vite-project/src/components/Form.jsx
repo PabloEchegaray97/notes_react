@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-const Form = ({ oldNote }) => {
+const Form = ({ oldNote, getNotes }) => {
     const [note, setNote] = useState({
         title: '',
         content: ''
@@ -39,6 +39,7 @@ const Form = ({ oldNote }) => {
 
         }
         await fetch(URL, params)
+        getNotes()
     }
     const onSubmit = (event) => {
         event.preventDefault();
