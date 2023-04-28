@@ -66,7 +66,7 @@ const Form = ({ oldNote, getNotes }) => {
 
     return (
         <Card sx={{ display: 'flex', justifyContent: 'center', alignItems:'center', background:'inherit', boxShadow:'none'}}>
-            <CardContent sx={{paddingTop:'1rem'}}>
+            <CardContent sx={{paddingTop:'1rem', minWidth:'100%'}}>
                 <form action="" onSubmit={onSubmit} className='form-mod'>
                     <div className="form-group">
                         <TextField
@@ -77,7 +77,7 @@ const Form = ({ oldNote, getNotes }) => {
                             name='title'
                             variant="outlined"
                             multiline
-                            sx={{ marginBottom: 1, width: '20rem' }}
+                            sx={{ marginBottom: 1, minWidth: '100%' }}
                             
                         />
                     </div>
@@ -90,15 +90,15 @@ const Form = ({ oldNote, getNotes }) => {
                             name='content'
                             variant="outlined"
                             multiline
-                            sx={{ marginBottom: 1, width: '20rem' }}
+                            sx={{ marginBottom: 1, minWidth: '100%' }}
                             
                             rows={4}
                         />
                     </div>
                     <CardActions sx={{ display: 'flex', justifyContent: 'center', padding:0 }}>
                         {note._id
-                            ? <Button size='large' type="submit" >update</Button>
-                            : <Button type="submit" sx={{width:'100%', background:'#1A73E8', color:'#fafafa'}}>save</Button>
+                            ? <Button size='large' type="submit" sx={{ width:'100%', background:'#088395', color:'#fafafa', '&:hover':{bgcolor:'#00FFCA', color:'#303030'}}}>update</Button>
+                            : <Button size='large' type="submit" sx={{width:'100%', background:'#0A4D68', color:'#fafafa'}}>save</Button>
                         }
                     </CardActions>
                 </form>
