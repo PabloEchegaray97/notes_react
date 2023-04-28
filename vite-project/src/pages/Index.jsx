@@ -2,6 +2,7 @@ import ListGroup from "../components/ListGroup";
 import Form from "../components/Form";
 import { useEffect, useState } from "react";
 import Note from '../components/Note'
+import { Grid, Container, Paper } from '@mui/material';
 const Index = () => {
     const [notes, setNotes] = useState([])
     const [oldNote, setOldNote] = useState([])
@@ -32,25 +33,29 @@ const Index = () => {
         console.log(inUse)
         console.log(id)
     }
-    const getNote = async(id) =>{
-        const note = await fetch('http://localhost:3000/api/notes/'+id)
+    const getNote = async (id) => {
+        const note = await fetch('http://localhost:3000/api/notes/' + id)
         const result = await note.json()
         console.log(result)
         setOldNote(result)
     }
     return (
-        <div>
-            <div>
-                <Form oldNote={oldNote} getNotes={getNotes} ></Form>
-            </div>
-            <div>
-                <ListGroup>
-                    {notes.map((note, index) => (
-                        <Note key={index} id={note._id} deleteNote={deleteNote} getNote= {getNote} title={note.title} content={note.content}></Note>
-                    ))}
-                </ListGroup>
-            </div>
-        </div>
+        <Container>
+            <Grid container spacing={2}>
+
+                <Grid item xs={12} sm={5}>
+                    <Form oldNote={oldNote} getNotes={getNotes} ></Form>
+                </Grid>
+                <Grid item xs={12} sm={5}>
+                    <h2>Notes</h2>
+                    <ListGroup>
+                        {notes.map((note, index) => (
+                            <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content}></Note>
+                        ))}
+                    </ListGroup>
+                </Grid>
+            </Grid>
+        </Container>
     );
 }
 
