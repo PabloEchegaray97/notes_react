@@ -4,6 +4,7 @@ import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Button from '@mui/material/Button';
+import Typography from '@mui/material/Typography';
 const Form = ({ oldNote, getNotes }) => {
     const [note, setNote] = useState({
         title: '',
@@ -66,15 +67,15 @@ const Form = ({ oldNote, getNotes }) => {
             <div className="card-body">
                 <form action="" onSubmit={onSubmit}>
                     <div className="form-group">
-                        <Input name='title' value={note.title} onChange={changeHandler} type="text" placeholder='Title'  sx={{ width: '20rem' }}/>
+                        <Input name='title' value={note.title} onChange={changeHandler} type="text" placeholder='Title' className='input-mod'/>
                     </div>
                     <div className="form-group">
-                        <Input name='content' multiline value={note.content} onChange={changeHandler} type="text" placeholder='Content' sx={{ width: '20rem' }} />
+                        <Input name='content' multiline value={note.content} onChange={changeHandler} type="text" placeholder='Content' className='input-mod'/>
                         
                     </div>
                     {note._id
-                        ? <Button size='small' type="submit" >update</Button>
-                        : <Button size='small' type="submit" >save</Button>
+                        ? <Button size='small' type="submit">update</Button>
+                        : <Button size='small' type="submit">save</Button>
                     }
                 </form>
             </div>

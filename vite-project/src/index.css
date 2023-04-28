@@ -10,3 +10,6 @@
 .card-custom {
   margin: 1rem;
 }
+.input-mod {
+  min-width: 12rem;
+}
