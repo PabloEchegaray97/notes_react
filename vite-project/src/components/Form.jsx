@@ -62,16 +62,31 @@ const Form = ({ oldNote, getNotes }) => {
     }, [oldNote])
 
     return (
-        <div className="bg-custom">
-            
+        <div>
+
             <div className="card-body">
                 <form action="" onSubmit={onSubmit}>
                     <div className="form-group">
-                        <Input name='title' value={note.title} onChange={changeHandler} type="text" placeholder='Title' className='input-mod'/>
+                        
+                        <TextField
+                            id="outlined-controlled"
+                            label="Title"
+                            value={note.title}
+                            onChange={changeHandler}
+                            name='title'
+                            variant="filled"
+                        />
                     </div>
                     <div className="form-group">
-                        <Input name='content' multiline value={note.content} onChange={changeHandler} type="text" placeholder='Content' className='input-mod'/>
                         
+                        <TextField
+                            id="outlined-controlled"
+                            label="Content"
+                            value={note.content}
+                            onChange={changeHandler}
+                            name='content'
+                            variant="filled"
+                        />
                     </div>
                     {note._id
                         ? <Button size='small' type="submit">update</Button>

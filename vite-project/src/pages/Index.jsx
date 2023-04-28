@@ -4,6 +4,16 @@ import { useEffect, useState } from "react";
 import Note from '../components/Note'
 import { Grid, Container, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
+import CssBaseline from '@mui/material/CssBaseline';
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+});
+
+
 const Index = () => {
     const [notes, setNotes] = useState([])
     const [oldNote, setOldNote] = useState([])
@@ -41,23 +51,28 @@ const Index = () => {
         setOldNote(result)
     }
     return (
-        <Container>
-            <Grid container spacing={2}>
+        <ThemeProvider theme={darkTheme}>
+            <CssBaseline>
 
-                <Grid item xs={12} sm={5}>
-                    <Typography gutterBottom variant='h4'>Add note</Typography>
-                    <Form oldNote={oldNote} getNotes={getNotes} ></Form>
+            <Container>
+                <Grid container spacing={2}>
+
+                    <Grid item xs={12} sm={5}>
+                        <Typography gutterBottom variant='h4'>Add note</Typography>
+                        <Form oldNote={oldNote} getNotes={getNotes} ></Form>
+                    </Grid>
+                    <Grid item xs={12} sm={5}>
+                        <Typography gutterBottom variant='h4'>Notes</Typography>
+                        <ListGroup>
+                            {notes.map((note, index) => (
+                                <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content}></Note>
+                                ))}
+                        </ListGroup>
+                    </Grid>
                 </Grid>
-                <Grid item xs={12} sm={5}>
-                    <Typography gutterBottom variant='h4'>Notes</Typography>
-                    <ListGroup>
-                        {notes.map((note, index) => (
-                            <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content}></Note>
-                        ))}
-                    </ListGroup>
-                </Grid>
-            </Grid>
-        </Container>
+            </Container>
+                                </CssBaseline>
+        </ThemeProvider>
     );
 }
 
