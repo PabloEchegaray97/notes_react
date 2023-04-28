@@ -44,7 +44,6 @@ const Index = () => {
                 <Form oldNote={oldNote} getNotes={getNotes} ></Form>
             </div>
             <div>
-                Notes
                 <ListGroup>
                     {notes.map((note, index) => (
                         <Note key={index} id={note._id} deleteNote={deleteNote} getNote= {getNote} title={note.title} content={note.content}></Note>

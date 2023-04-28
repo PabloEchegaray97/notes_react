@@ -1,5 +1,9 @@
 import { useEffect, useState } from "react";
-
+import Box from '@mui/material/Box';
+import TextField from '@mui/material/TextField';
+import Input from '@mui/material/Input';
+import TextareaAutosize from '@mui/material/TextareaAutosize';
+import Button from '@mui/material/Button';
 const Form = ({ oldNote, getNotes }) => {
     const [note, setNote] = useState({
         title: '',
@@ -48,6 +52,7 @@ const Form = ({ oldNote, getNotes }) => {
             'title': '',
             'content': ''
         })
+
     }
 
     useEffect(() => {
@@ -56,21 +61,20 @@ const Form = ({ oldNote, getNotes }) => {
     }, [oldNote])
 
     return (
-        <div className="card">
-            <div className="card-header">
-                Add note
-            </div>
+        <div className="bg-custom">
+            
             <div className="card-body">
                 <form action="" onSubmit={onSubmit}>
                     <div className="form-group">
-                        <input name='title' value={note.title} onChange={changeHandler} type="text" placeholder='Title' className="form-control" />
+                        <Input name='title' value={note.title} onChange={changeHandler} type="text" placeholder='Title'  sx={{ width: '20rem' }}/>
                     </div>
                     <div className="form-group">
-                        <textarea name="content" value={note.content} onChange={changeHandler} id="" cols="30" rows="10" placeholder="content"></textarea>
+                        <Input name='content' multiline value={note.content} onChange={changeHandler} type="text" placeholder='Content' sx={{ width: '20rem' }} />
+                        
                     </div>
                     {note._id
-                        ? <button type="submit" >update</button>
-                        : <button type="submit" >save</button>
+                        ? <Button size='small' type="submit" >update</Button>
+                        : <Button size='small' type="submit" >save</Button>
                     }
                 </form>
             </div>
