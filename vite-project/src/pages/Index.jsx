@@ -53,15 +53,14 @@ const Index = () => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline>
-                <Container>
+                <Container sx={{marginTop:'1rem'}}>
                     <Grid container spacing={2}>
-
-                        <Grid item xs={12} sm={5}>
-                            <Typography gutterBottom variant='h4'>Add note</Typography>
+                        <Grid item xs={12} sm={6} md={5}>
+                            <Typography gutterBottom variant='h4' sx={{display:'flex',justifyContent:'center'}}>Add note</Typography>
                             <Form oldNote={oldNote} getNotes={getNotes} ></Form>
                         </Grid>
-                        <Grid item xs={12} sm={5}>
-                            <Typography gutterBottom variant='h4'>Notes</Typography>
+                        <Grid item xs={12} sm={6} md={7}>
+                            <Typography gutterBottom variant='h4' sx={{display:'flex',justifyContent:'center'}}>Notes</Typography>
                             <ListGroup>
                                 {notes.map((note, index) => (
                                     <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content}></Note>

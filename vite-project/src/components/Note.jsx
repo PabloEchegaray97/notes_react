@@ -17,8 +17,8 @@ const Note = ({ title, content, id, deleteNote, getNote }) => {
                     {content}
                 </Typography>
                 <CardActions>
-                <Button size='small' onClick={(e) => getNote(id)}>edit</Button>
-                <Button size='small' onClick={(e) => deleteNote(id)}>delete</Button>
+                <Button size='medium' onClick={(e) => getNote(id)}>edit</Button>
+                <Button size='medium' onClick={(e) => deleteNote(id)}>delete</Button>
                 </CardActions>
             </CardContent>
             

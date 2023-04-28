@@ -4,7 +4,10 @@ import TextField from '@mui/material/TextField';
 import Input from '@mui/material/Input';
 import TextareaAutosize from '@mui/material/TextareaAutosize';
 import Button from '@mui/material/Button';
+import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import CardActions from '@mui/material/CardActions';
+import Card from '@mui/material/Card';
 const Form = ({ oldNote, getNotes }) => {
     const [note, setNote] = useState({
         title: '',
@@ -62,39 +65,45 @@ const Form = ({ oldNote, getNotes }) => {
     }, [oldNote])
 
     return (
-        <div>
-
-            <div className="card-body">
-                <form action="" onSubmit={onSubmit}>
+        <Card sx={{ display: 'flex', justifyContent: 'center', alignItems:'center', background:'inherit', boxShadow:'none'}}>
+            <CardContent sx={{paddingTop:'1rem'}}>
+                <form action="" onSubmit={onSubmit} className='form-mod'>
                     <div className="form-group">
-                        
                         <TextField
                             id="outlined-controlled"
                             label="Title"
                             value={note.title}
                             onChange={changeHandler}
                             name='title'
-                            variant="filled"
+                            variant="outlined"
+                            multiline
+                            sx={{ marginBottom: 1, width: '20rem' }}
+                            
                         />
                     </div>
                     <div className="form-group">
-                        
                         <TextField
                             id="outlined-controlled"
                             label="Content"
                             value={note.content}
                             onChange={changeHandler}
                             name='content'
-                            variant="filled"
+                            variant="outlined"
+                            multiline
+                            sx={{ marginBottom: 1, width: '20rem' }}
+                            
+                            rows={4}
                         />
                     </div>
-                    {note._id
-                        ? <Button size='small' type="submit">update</Button>
-                        : <Button size='small' type="submit">save</Button>
-                    }
+                    <CardActions sx={{ display: 'flex', justifyContent: 'center', padding:0 }}>
+                        {note._id
+                            ? <Button size='large' type="submit" >update</Button>
+                            : <Button type="submit" sx={{width:'100%', background:'#1A73E8', color:'#fafafa'}}>save</Button>
+                        }
+                    </CardActions>
                 </form>
-            </div>
-        </div>
+            </CardContent>
+        </Card>
     )
 }
 
