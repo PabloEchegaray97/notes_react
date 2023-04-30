@@ -13,6 +13,8 @@ const Form = ({ oldNote, getNotes }) => {
         title: '',
         content: ''
     })
+    const [error, setError] = useState(null)
+    
     const changeHandler = (event) => {
         let newNote = {
             [event.target.name]: event.target.value,
@@ -23,6 +25,7 @@ const Form = ({ oldNote, getNotes }) => {
         setNote({ ...note, ...newNote })
         console.log(note)
     }
+    
     const saveNote = async () => {
         let URL = ''
         let params = {}
@@ -46,7 +49,16 @@ const Form = ({ oldNote, getNotes }) => {
             }
 
         }
-        await fetch(URL, params)
+        try {
+            const response = await fetch(URL, params)
+            if (!response.ok) {
+                // Si la respuesta no es correcta (status >= 400), lanzar un error
+                throw new Error(response.statusText);
+              }
+            setError(null);
+        } catch (error) {
+            setError('No se pudo procesar la solicitud: ' + error.message);
+        }
         getNotes()
     }
     const onSubmit = (event) => {
@@ -68,6 +80,8 @@ const Form = ({ oldNote, getNotes }) => {
         <Card sx={{ display: 'flex', justifyContent: 'center', alignItems:'center', background:'inherit', boxShadow:'none'}}>
             <CardContent sx={{paddingTop:'1rem', minWidth:'100%'}}>
                 <form action="" onSubmit={onSubmit} className='form-mod'>
+                {error && <p>Error: {error}</p>}
+
                     <div className="form-group">
                         <TextField
                             id="outlined-controlled"
@@ -97,8 +111,8 @@ const Form = ({ oldNote, getNotes }) => {
                     </div>
                     <CardActions sx={{ display: 'flex', justifyContent: 'center', padding:0 }}>
                         {note._id
-                            ? <Button size='large' type="submit" sx={{ width:'100%', background:'#088395', color:'#fafafa', '&:hover':{bgcolor:'#00FFCA', color:'#303030'}}}>update</Button>
-                            : <Button size='large' type="submit" sx={{width:'100%', background:'#0A4D68', color:'#fafafa'}}>save</Button>
+                            ? <Button size='large' type="submit" sx={{ width:'100%', background:'#4285F4', color:'#fafafa', '&:hover':{bgcolor:'#fafafa', color:'#303030'}}}>update</Button>
+                            : <Button size='large' type="submit" sx={{width:'100%', background:'#4285F4', color:'#fafafa'}}>save</Button>
                         }
                     </CardActions>
                 </form>

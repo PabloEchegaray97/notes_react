@@ -6,7 +6,7 @@ import { Grid, Container, Paper } from '@mui/material';
 import Typography from '@mui/material/Typography';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-
+import Alert_info from "../components/Alert_info";
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
@@ -57,13 +57,15 @@ const Index = () => {
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6} md={5}>
                             <Typography gutterBottom variant='h4' sx={{display:'flex',justifyContent:'center'}}>Add note</Typography>
+                            
                             <Form oldNote={oldNote} getNotes={getNotes} ></Form>
+                            
                         </Grid>
                         <Grid item xs={12} sm={6} md={7}>
                             <Typography gutterBottom variant='h4' sx={{display:'flex',justifyContent:'center'}}>Notes</Typography>
                             <ListGroup>
                                 {notes.map((note, index) => (
-                                    <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content}></Note>
+                                    <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content} time={note.time}></Note>
                                 ))}
                             </ListGroup>
                         </Grid>

@@ -8,16 +8,24 @@ const router = Router();
 router.get('/notes', async (req, res) => {
     //res.send('hi')
     const notes = await Note.find();
+    
     res.send(notes);
 })
 
 router.post('/notes', async (req, res) => {
+    const data = req.body
+    
     const note = new Note({
         'title': req.body.title,
-        'content': req.body.content
+        'content': req.body.content,
+        'time': data.timestamp = new Date().toLocaleTimeString()
     })
-    await note.save();
-    res.send(note);
+    if(req.body.title!="" && req.body.content!="") {
+        await note.save();
+        res.send(note);
+    } else {
+        res.status(400).send('Faltan campos obligatorios')
+    }
 
 })
 
@@ -29,6 +37,7 @@ router.get('/notes/:id', async (req, res) => {
 })
 
 router.patch('/notes/:id', async (req, res) => {
+    const data = req.body
     try {
         const note = await Note.findOne({
             _id: req.params.id
@@ -39,6 +48,7 @@ router.patch('/notes/:id', async (req, res) => {
         if (req.body.content) {
             note.content = req.body.content;
         }
+        note.time = data.timestamp = new Date().toLocaleTimeString()
         note.save();
         res.send(note);
     } catch {

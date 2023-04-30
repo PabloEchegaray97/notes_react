@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 
 const schema = mongoose.Schema({
         title: String,
-        content: String
+        content: String,
+        time: String,
     })
 export default mongoose.model('Notes', schema)

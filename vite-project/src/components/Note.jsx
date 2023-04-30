@@ -7,21 +7,26 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 
 
-const Note = ({ title, content, id, deleteNote, getNote }) => {
-    console.log(typeof(content))
+const Note = ({ title, content, id, deleteNote, getNote, time }) => {
+    console.log(typeof (content))
     return (
         <Card className='font-mod card-custom'>
             <CardContent>
                 <Typography gutterBottom variant='h5' component='div'>{title}</Typography>
-                <Typography variant="body2" color="text.secondary">
+                
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     {content}
                 </Typography>
+                <Typography variant="caption" display="block"  sx={{color:'grey'}}>
+                    Last update: {time}
+                </Typography>
                 <CardActions>
-                <Button size='medium' onClick={(e) => getNote(id)}>edit</Button>
-                <Button size='medium' onClick={(e) => deleteNote(id)}>delete</Button>
+                    <Button size='medium' onClick={(e) => getNote(id)}>edit</Button>
+                    <Button size='medium' onClick={(e) => deleteNote(id)}>delete</Button>
                 </CardActions>
+               
             </CardContent>
-            
+
         </Card>
     );
 }
