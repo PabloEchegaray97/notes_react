@@ -1,31 +1,22 @@
 import { useEffect, useState } from "react";
-import Box from '@mui/material/Box';
-import TextField from '@mui/material/TextField';
-import Input from '@mui/material/Input';
-import TextareaAutosize from '@mui/material/TextareaAutosize';
-import Button from '@mui/material/Button';
-import CardContent from '@mui/material/CardContent';
-import Typography from '@mui/material/Typography';
-import CardActions from '@mui/material/CardActions';
-import Card from '@mui/material/Card';
+import {Box, TextField, Button, CardContent, Typography, CardActions, Card } from '@mui/material';
+import Alert_info from "./Alert_info";
 const Form = ({ oldNote, getNotes }) => {
     const [note, setNote] = useState({
         title: '',
         content: ''
     })
+    const [update, setUpdate] = useState(null)
     const [error, setError] = useState(null)
-    
     const changeHandler = (event) => {
         let newNote = {
             [event.target.name]: event.target.value,
             [event.target.name]: event.target.value
         }
-        //console.log(event.target.value)
-        //console.log(event.target.name)
         setNote({ ...note, ...newNote })
         console.log(note)
     }
-    
+
     const saveNote = async () => {
         let URL = ''
         let params = {}
@@ -54,10 +45,15 @@ const Form = ({ oldNote, getNotes }) => {
             if (!response.ok) {
                 // Si la respuesta no es correcta (status >= 400), lanzar un error
                 throw new Error(response.statusText);
-              }
+            } else {
+                console.log(response.statusText)
+                setUpdate('Note saved')
+                setTimeout(() => setUpdate(null), 2000); // Ocultar el mensaje después de 3 segundos
+            }
             setError(null);
         } catch (error) {
-            setError('No se pudo procesar la solicitud: ' + error.message);
+            console.log(error.message)
+            setError('Remember to complete any field');
         }
         getNotes()
     }
@@ -68,7 +64,6 @@ const Form = ({ oldNote, getNotes }) => {
             'title': '',
             'content': ''
         })
-
     }
 
     useEffect(() => {
@@ -77,13 +72,13 @@ const Form = ({ oldNote, getNotes }) => {
     }, [oldNote])
 
     return (
-        <Card sx={{ display: 'flex', justifyContent: 'center', alignItems:'center', background:'inherit', boxShadow:'none'}}>
-            <CardContent sx={{paddingTop:'1rem', minWidth:'100%'}}>
+        <Card sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'inherit', boxShadow: 'none' }}>
+            <CardContent sx={{ paddingTop: '1rem', minWidth: '100%' }}>
                 <form action="" onSubmit={onSubmit} className='form-mod'>
-                {error && <p>Error: {error}</p>}
-
-                    <div className="form-group">
+                    
+                    <Box>
                         <TextField
+                            required
                             id="outlined-controlled"
                             label="Title"
                             value={note.title}
@@ -92,11 +87,11 @@ const Form = ({ oldNote, getNotes }) => {
                             variant="outlined"
                             multiline
                             sx={{ marginBottom: 1, minWidth: '100%' }}
-                            
                         />
-                    </div>
-                    <div className="form-group">
+                    </Box>
+                    <Box>
                         <TextField
+                            required
                             id="outlined-controlled"
                             label="Content"
                             value={note.content}
@@ -105,17 +100,18 @@ const Form = ({ oldNote, getNotes }) => {
                             variant="outlined"
                             multiline
                             sx={{ marginBottom: 1, minWidth: '100%' }}
-                            
                             rows={4}
                         />
-                    </div>
-                    <CardActions sx={{ display: 'flex', justifyContent: 'center', padding:0 }}>
+                    </Box>
+                    <CardActions sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
-                            ? <Button size='large' type="submit" sx={{ width:'100%', background:'#4285F4', color:'#fafafa', '&:hover':{bgcolor:'#fafafa', color:'#303030'}}}>update</Button>
-                            : <Button size='large' type="submit" sx={{width:'100%', background:'#4285F4', color:'#fafafa'}}>save</Button>
+                            ? <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}>update</Button>
+                            : <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa' }}>save</Button>
                         }
                     </CardActions>
                 </form>
+                {error && <Alert_info severity="warning" color="warning" content={error}></Alert_info>}
+                {update && <Alert_info severity="success" color="success" content={update}></Alert_info>}
             </CardContent>
         </Card>
     )

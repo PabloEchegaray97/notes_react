@@ -1,9 +1,9 @@
 import Alert from '@mui/material/Alert';
 
-const Alert_info = ({severity, color}) => {
+const Alert_info = ({severity, color, content}) => {
     return (
-        <Alert severity={severity} color={color}>
-            Remember to complete any field
+        <Alert severity={severity} color={color} sx={{mt:'.5rem'}}>
+            {content}
         </Alert>
     );
 }

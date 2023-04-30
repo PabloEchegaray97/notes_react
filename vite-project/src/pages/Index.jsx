@@ -1,18 +1,16 @@
+import { useEffect, useState } from "react";
 import ListGroup from "../components/ListGroup";
 import Form from "../components/Form";
-import { useEffect, useState } from "react";
+import Alert_info from "../components/Alert_info";
 import Note from '../components/Note'
-import { Grid, Container, Paper } from '@mui/material';
-import Typography from '@mui/material/Typography';
+import { Typography, Grid, Container, Paper, TextField } from '@mui/material';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
-import Alert_info from "../components/Alert_info";
 const darkTheme = createTheme({
     palette: {
         mode: 'dark',
     },
 });
-
 
 const Index = () => {
     const [notes, setNotes] = useState([])
@@ -53,16 +51,23 @@ const Index = () => {
     return (
         <ThemeProvider theme={darkTheme}>
             <CssBaseline>
-                <Container sx={{marginTop:'1rem'}}>
+                <Container sx={{ marginTop: '1rem' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6} md={5}>
-                            <Typography gutterBottom variant='h4' sx={{display:'flex',justifyContent:'center'}}>Add note</Typography>
-                            
+                            <Typography gutterBottom variant='h4' sx={{ display: 'flex', justifyContent: 'center' }}>Add note</Typography>
+
                             <Form oldNote={oldNote} getNotes={getNotes} ></Form>
-                            
+
                         </Grid>
                         <Grid item xs={12} sm={6} md={7}>
-                            <Typography gutterBottom variant='h4' sx={{display:'flex',justifyContent:'center'}}>Notes</Typography>
+                            <TextField
+                                id="filled-search"
+                                label="Search"
+                                type="search"
+                                variant="filled"
+                                sx={{width:'100%', mb:'1rem'}}
+                            />
+                            <Typography gutterBottom variant='h4' sx={{ display: 'flex', justifyContent: 'center' }}>Notes</Typography>
                             <ListGroup>
                                 {notes.map((note, index) => (
                                     <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content} time={note.time}></Note>

@@ -24,7 +24,7 @@ router.post('/notes', async (req, res) => {
         await note.save();
         res.send(note);
     } else {
-        res.status(400).send('Faltan campos obligatorios')
+        res.status(400).send('Obligatory fields missing')
     }
 
 })
