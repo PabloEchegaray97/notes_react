@@ -72,8 +72,8 @@ const Form = ({ oldNote, getNotes }) => {
     }, [oldNote])
 
     return (
-        <Card sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'inherit', boxShadow: 'none' }}>
-            <CardContent sx={{ paddingTop: '1rem', minWidth: '100%' }}>
+        <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'inherit', boxShadow: 'none' }}>
+            <Box sx={{ paddingTop: '1rem', minWidth: '100%' }}>
                 <form action="" onSubmit={onSubmit} className='form-mod'>
                     
                     <Box>
@@ -103,17 +103,17 @@ const Form = ({ oldNote, getNotes }) => {
                             rows={4}
                         />
                     </Box>
-                    <CardActions sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
+                    <Box sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
                             ? <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}>update</Button>
                             : <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa' }}>save</Button>
                         }
-                    </CardActions>
+                    </Box>
                 </form>
                 {error && <Alert_info severity="warning" color="warning" content={error}></Alert_info>}
                 {update && <Alert_info severity="success" color="success" content={update}></Alert_info>}
-            </CardContent>
-        </Card>
+            </Box>
+        </Box>
     )
 }
 

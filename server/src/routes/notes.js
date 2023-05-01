@@ -7,8 +7,13 @@ const router = Router();
 //solicitudes (request, response)
 router.get('/notes', async (req, res) => {
     //res.send('hi')
-    const notes = await Note.find();
-    
+    const {title} = req.query;
+    let notes;
+    if (title) {
+        notes = await Note.find({title:{ $regex: title, $options: 'i'} });
+    } else {
+        notes = await Note.find()
+    }
     res.send(notes);
 })
 
