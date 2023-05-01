@@ -90,6 +90,7 @@ const Index = () => {
                         </Grid>
                         <Grid item xs={12} sm={6} md={7}>
 
+                            <Typography gutterBottom variant='h4' sx={{ display: 'flex', justifyContent: 'center'}}>Notes</Typography>
                                 <TextField
                                     id="filled-search"
                                     label="Search"
@@ -97,9 +98,8 @@ const Index = () => {
                                     variant="outlined"
                                     value={title || ''}
                                     onChange={handleInputChange}
-                                    sx={{mb: '1rem', width:'100%' }}
+                                    sx={{mt: '1rem', width:'100%' }}
                                 />
-                            <Typography gutterBottom variant='h4' sx={{ display: 'flex', justifyContent: 'center'}}>Notes</Typography>
                             {notes == '' && <Alert_info severity="info" color="info" content="Notes should appear here"></Alert_info>}
                             <ListGroup>
                                 {notes.map((note, index) => (

@@ -4,7 +4,7 @@ import {Box, CardMedia, Button, CardContent, Typography, CardActions, Card } fro
 const Note = ({ title, content, id, deleteNote, getNote, time }) => {
     console.log(typeof (content))
     return (
-        <Card className='font-mod card-custom'>
+        <Card className='font-mod card-custom' sx={{width:'100%'}}>
             <CardContent>
                 <Typography gutterBottom variant='h5' component='div'>{title}</Typography>
                 

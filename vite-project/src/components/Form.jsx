@@ -86,7 +86,7 @@ const Form = ({ oldNote, getNotes }) => {
                             name='title'
                             variant="outlined"
                             multiline
-                            sx={{ marginBottom: 1, minWidth: '100%' }}
+                            sx={{ marginBottom: '1rem', minWidth: '100%' }}
                         />
                     </Box>
                     <Box>
@@ -99,7 +99,7 @@ const Form = ({ oldNote, getNotes }) => {
                             name='content'
                             variant="outlined"
                             multiline
-                            sx={{ marginBottom: 1, minWidth: '100%' }}
+                            sx={{ marginBottom: '1rem', minWidth: '100%' }}
                             rows={4}
                         />
                     </Box>

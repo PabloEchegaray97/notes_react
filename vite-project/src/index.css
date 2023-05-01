@@ -20,7 +20,9 @@ body {
 }
 ::-webkit-scrollbar {
   width: .7rem;
+  background-color: rgba(255,255,255,0.009);
 }
+
 
 ::-webkit-scrollbar-thumb {
   background-color: #90caf9;
