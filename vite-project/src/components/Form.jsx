@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
-import {Box, TextField, Button, CardContent, Typography, CardActions, Card } from '@mui/material';
+import { Box, TextField, Button, CardContent, Typography, CardActions, Card } from '@mui/material';
 import Alert_info from "./Alert_info";
+import Flag_rating from "./Flag_rating";
+
 const Form = ({ oldNote, getNotes }) => {
     const [note, setNote] = useState({
         title: '',
@@ -8,6 +10,8 @@ const Form = ({ oldNote, getNotes }) => {
     })
     const [update, setUpdate] = useState(null)
     const [error, setError] = useState(null)
+    const [rating, setRating] = useState(false)
+
     const changeHandler = (event) => {
         let newNote = {
             [event.target.name]: event.target.value,
@@ -47,6 +51,7 @@ const Form = ({ oldNote, getNotes }) => {
                 throw new Error(response.statusText);
             } else {
                 console.log(response.statusText)
+                setRating(!rating)
                 setUpdate('Note saved')
                 setTimeout(() => setUpdate(null), 2000); // Ocultar el mensaje después de 3 segundos
             }
@@ -64,18 +69,19 @@ const Form = ({ oldNote, getNotes }) => {
             'title': '',
             'content': ''
         })
+        
     }
-
+   
     useEffect(() => {
         setNote({ ...note, ...oldNote })
         console.log(note)
-    }, [oldNote])
+    }, [oldNote, update])
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'inherit', boxShadow: 'none' }}>
             <Box sx={{ paddingTop: '1rem', minWidth: '100%' }}>
                 <form action="" onSubmit={onSubmit} className='form-mod'>
-                    
+
                     <Box>
                         <TextField
                             required
@@ -103,6 +109,7 @@ const Form = ({ oldNote, getNotes }) => {
                             rows={4}
                         />
                     </Box>
+                    <Flag_rating rating={rating}></Flag_rating>
                     <Box sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
                             ? <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}>update</Button>
@@ -110,6 +117,7 @@ const Form = ({ oldNote, getNotes }) => {
                         }
                     </Box>
                 </form>
+                
                 {error && <Alert_info severity="warning" color="warning" content={error}></Alert_info>}
                 {update && <Alert_info severity="success" color="success" content={update}></Alert_info>}
             </Box>

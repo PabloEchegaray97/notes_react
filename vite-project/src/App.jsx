@@ -4,11 +4,12 @@ import viteLogo from '/vite.svg'
 import './App.css'
 import Example from './components/example'
 import Index from './pages/Index'
-
+import CustomizedRating from './components/Flag_rating'
 function App() {
   return (
     <>
-      <Index></Index>
+      <Index>
+      </Index>
     </>
   )
 }
