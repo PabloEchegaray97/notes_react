@@ -27,7 +27,6 @@ router.post('/notes', async (req, res) => {
         'priority':req.body.priority
     })
 
-    console.log(req.body)
     if(req.body.title!="" && req.body.content!="") {
         await note.save();
         res.send(note);
@@ -46,6 +45,7 @@ router.get('/notes/:id', async (req, res) => {
 
 router.patch('/notes/:id', async (req, res) => {
     const data = req.body
+    console.log(data)
     try {
         const note = await Note.findOne({
             _id: req.params.id
@@ -57,6 +57,7 @@ router.patch('/notes/:id', async (req, res) => {
             note.content = req.body.content;
         }
         note.time = data.timestamp = new Date().toLocaleTimeString()
+        note.priority = req.body.priority;
         note.save();
         res.send(note);
     } catch {

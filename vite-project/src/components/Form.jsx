@@ -28,7 +28,7 @@ const Form = ({ oldNote, getNotes }) => {
             [event.target.name]: event.target.value,
         }
         setNote(prevNote => ({...prevNote, ...newNote}))
-        console.log(note)
+
     }
 
     const saveNote = async () => {
@@ -38,7 +38,7 @@ const Form = ({ oldNote, getNotes }) => {
             URL = 'http://localhost:3000/api/notes/' + note._id
             params = {
                 method: 'PATCH',
-                body: JSON.stringify(note),
+                body: JSON.stringify({...note, priority:value}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -84,8 +84,7 @@ const Form = ({ oldNote, getNotes }) => {
 
     useEffect(() => {
         setNote({ ...note, ...oldNote })
-        console.log(note)
-    }, [oldNote, update])
+    }, [oldNote])
 
     return (
         <Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', background: 'inherit', boxShadow: 'none' }}>
