@@ -15,9 +15,9 @@ const Form = ({ oldNote, getNotes }) => {
     const [rating, setRating] = useState(false)
 
     const handleChildValueChange = (newValue) => {
-        console.log("hola")
+ 
         setValue(newValue)
-        console.log(newValue + "a ver");
+
     };
 
     const changeHandler = (event) => {

@@ -7,7 +7,6 @@ import Chip from '@mui/material/Chip';
 const Flag_rating = ({ onValueChange, rating }) => {
     const [ratingValue, setRatingValueInternal] = useState(0);
     useEffect(() => {
-        console.log("memonte")
         setRatingValueInternal(0)
     }, [rating])
 
