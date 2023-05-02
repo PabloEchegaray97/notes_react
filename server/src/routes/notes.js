@@ -23,8 +23,11 @@ router.post('/notes', async (req, res) => {
     const note = new Note({
         'title': req.body.title,
         'content': req.body.content,
-        'time': data.timestamp = new Date().toLocaleTimeString()
+        'time': data.timestamp = new Date().toLocaleTimeString(),
+        'priority':req.body.priority
     })
+
+    console.log(req.body)
     if(req.body.title!="" && req.body.content!="") {
         await note.save();
         res.send(note);

@@ -103,7 +103,7 @@ const Index = () => {
                             {notes == '' && <Alert_info severity="info" color="info" content="Notes should appear here"></Alert_info>}
                             <ListGroup>
                                 {notes.map((note, index) => (
-                                    <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content} time={note.time}></Note>
+                                    <Note key={index} id={note._id} deleteNote={deleteNote} getNote={getNote} title={note.title} content={note.content} time={note.time} priority={note.priority}></Note>
                                 ))}
                             </ListGroup>
                         </Grid>

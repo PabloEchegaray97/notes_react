@@ -4,20 +4,30 @@ import Alert_info from "./Alert_info";
 import Flag_rating from "./Flag_rating";
 
 const Form = ({ oldNote, getNotes }) => {
+    const [value, setValue] = useState(0)
     const [note, setNote] = useState({
         title: '',
-        content: ''
+        content: '',
+        priority: ''
     })
     const [update, setUpdate] = useState(null)
     const [error, setError] = useState(null)
     const [rating, setRating] = useState(false)
 
+    const handleChildValueChange = (newValue) => {
+        console.log("hola")
+        setValue(newValue)
+        console.log(newValue + "a ver");
+    };
+
     const changeHandler = (event) => {
+
         let newNote = {
+            ...note,
             [event.target.name]: event.target.value,
-            [event.target.name]: event.target.value
+            [event.target.name]: event.target.value,
         }
-        setNote({ ...note, ...newNote })
+        setNote(prevNote => ({...prevNote, ...newNote}))
         console.log(note)
     }
 
@@ -37,7 +47,7 @@ const Form = ({ oldNote, getNotes }) => {
             URL = 'http://localhost:3000/api/notes/'
             params = {
                 method: 'POST',
-                body: JSON.stringify(note),
+                body: JSON.stringify({...note, priority:value}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -69,9 +79,9 @@ const Form = ({ oldNote, getNotes }) => {
             'title': '',
             'content': ''
         })
-        
+
     }
-   
+
     useEffect(() => {
         setNote({ ...note, ...oldNote })
         console.log(note)
@@ -109,7 +119,8 @@ const Form = ({ oldNote, getNotes }) => {
                             rows={4}
                         />
                     </Box>
-                    <Flag_rating rating={rating}></Flag_rating>
+                    <p name='priority' value={value}>soy la prioridad {value}</p>
+                    <Flag_rating rating={rating} name="priority" onValueChange={handleChildValueChange}></Flag_rating>
                     <Box sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
                             ? <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}>update</Button>
@@ -117,7 +128,7 @@ const Form = ({ oldNote, getNotes }) => {
                         }
                     </Box>
                 </form>
-                
+
                 {error && <Alert_info severity="warning" color="warning" content={error}></Alert_info>}
                 {update && <Alert_info severity="success" color="success" content={update}></Alert_info>}
             </Box>
