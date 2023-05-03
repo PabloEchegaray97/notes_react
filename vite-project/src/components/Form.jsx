@@ -15,13 +15,10 @@ const Form = ({ oldNote, getNotes }) => {
     const [rating, setRating] = useState(false)
 
     const handleChildValueChange = (newValue) => {
- 
         setValue(newValue)
-
     };
 
     const changeHandler = (event) => {
-
         let newNote = {
             ...note,
             [event.target.name]: event.target.value,
@@ -38,7 +35,7 @@ const Form = ({ oldNote, getNotes }) => {
             URL = 'http://localhost:3000/api/notes/' + note._id
             params = {
                 method: 'PATCH',
-                body: JSON.stringify({...note, priority:value}),
+                body: JSON.stringify(note),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -52,7 +49,7 @@ const Form = ({ oldNote, getNotes }) => {
                     'Content-Type': 'application/json'
                 }
             }
-
+            
         }
         try {
             const response = await fetch(URL, params)
@@ -81,9 +78,10 @@ const Form = ({ oldNote, getNotes }) => {
         })
 
     }
-
+    
     useEffect(() => {
         setNote({ ...note, ...oldNote })
+        setUpdate(null)
     }, [oldNote])
 
     return (
@@ -118,8 +116,8 @@ const Form = ({ oldNote, getNotes }) => {
                             rows={4}
                         />
                     </Box>
-                    <p name='priority' value={value}>soy la prioridad {value}</p>
-                    <Flag_rating rating={rating} name="priority" onValueChange={handleChildValueChange}></Flag_rating>
+                    
+                    <Flag_rating name='priority' update={update} value={value} oldValue={oldNote.priority} rating={rating} onValueChange={handleChildValueChange}></Flag_rating>
                     <Box sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
                             ? <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}>update</Button>

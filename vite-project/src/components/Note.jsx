@@ -9,21 +9,21 @@ const Note = ({ title, content, id, deleteNote, getNote, time, priority }) => {
                 <Typography  variant='h4'>{title}</Typography>
                 <Typography variant="caption" color="text.secondary">
                 </Typography>
-                {priority == '1' && <Chip
+                {priority == 'low' && <Chip
                     label="low"
                     icon={<FlagIcon />}
                     color={'success'}
                     size='small'
                     sx={{color: 'white', mb:'1rem'}}
                 />}
-                {priority == '2' && <Chip
+                {priority == 'medium' && <Chip
                     label="medium"
                     icon={<FlagIcon />}
                     color={'warning'}
                     size='small'
                     sx={{color: 'white', mb:'1rem'}}
                 />}
-                {priority == '3' && <Chip
+                {priority == 'high' && <Chip
                     label="high"
                     icon={<FlagIcon />}
                     color={'error'}

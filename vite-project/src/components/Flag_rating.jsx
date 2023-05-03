@@ -4,15 +4,22 @@ import Typography from '@mui/material/Typography';
 import { useState, useEffect } from 'react';
 import Chip from '@mui/material/Chip';
 
-const Flag_rating = ({ onValueChange, rating }) => {
+const Flag_rating = ({ onValueChange, rating, value, oldValue, update}) => {
     const [ratingValue, setRatingValueInternal] = useState(0);
     useEffect(() => {
         setRatingValueInternal(0)
+        onValueChange(0)
     }, [rating])
 
+    useEffect(() => {
+        setRatingValueInternal(oldValue)
+    },[oldValue])
+    
     const handleChipClick = (nvalue) => {
+        
         setRatingValueInternal(nvalue);
         onValueChange(nvalue);
+        
     };
     return (
         <Box>
@@ -21,9 +28,9 @@ const Flag_rating = ({ onValueChange, rating }) => {
                 <Chip
                     label="Low"
                     icon={<FlagIcon />}
-                    color={ratingValue === 1 ? 'success' : 'default'}
+                    color={ratingValue == 'low' ? 'success' : 'default'}
                     onClick={() => {
-                        handleChipClick(1)
+                        handleChipClick('low')
 
                     }}
                     clickable={true}
@@ -32,20 +39,20 @@ const Flag_rating = ({ onValueChange, rating }) => {
                 <Chip
                     label="Medium"
                     icon={<FlagIcon />}
-                    color={ratingValue === 2 ? 'warning' : 'default'}
+                    color={ratingValue =='medium' ? 'warning' : 'default'}
                     onClick={() => {
-                        handleChipClick(2)
-
+                        handleChipClick('medium')
                     }}
                     clickable={true}
                     sx={{ mr: 2, color: 'white' }}
                 />
+
                 <Chip
                     label="High"
                     icon={<FlagIcon />}
-                    color={ratingValue === 3 ? 'error' : 'default'}
+                    color={ratingValue =='high' ? 'error' : 'default'}
                     onClick={() => {
-                        handleChipClick(3)
+                        handleChipClick('high')
                     }}
                     clickable={true}
                     sx={{ color: 'white' }}

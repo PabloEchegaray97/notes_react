@@ -8,13 +8,21 @@ const router = Router();
 router.get('/notes', async (req, res) => {
     //res.send('hi')
     const {title} = req.query;
+    let query = {}
     let notes;
     if (title) {
-        notes = await Note.find({title:{ $regex: title, $options: 'i'} });
-    } else {
-        notes = await Note.find()
+        query.$or = [
+            { title: { $regex: title, $options: 'i' } },
+            { priority: { $regex: title, $options: 'i' } }
+        ];
+    } 
+    try {
+        notes = await Note.find(query)
+        res.send(notes)
+    } catch (error) {
+        console.log(error)
+        res.status(500).send('Error')
     }
-    res.send(notes);
 })
 
 router.post('/notes', async (req, res) => {
