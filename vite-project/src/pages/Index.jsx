@@ -45,7 +45,7 @@ const Index = () => {
     }
     const handleInputChange = (event) => {
         setTitle(event.target.value);
-        console.log(title)
+        
         if (event.target.value === '') {
             setSearch(false);
             getNotes()
@@ -59,7 +59,7 @@ const Index = () => {
         getNotes()
     }, [])
     if (inUse) {
-        console.log("useeffect?")
+        
         getNotes()
         setInUse(false)
     }
@@ -70,8 +70,7 @@ const Index = () => {
             mode: 'cors'
         })
         setInUse(true);
-        console.log(inUse)
-        console.log(id)
+        
     }
     const getNote = async (id) => {
         const note = await fetch('http://localhost:3000/api/notes/' + id)

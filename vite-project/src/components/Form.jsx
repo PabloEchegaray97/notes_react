@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
 import { Box, TextField, Button, CardContent, Typography, CardActions, Card } from '@mui/material';
+
 import Priority_selector from "./Priority_selector";
 import Alert_button from "./Alert_button";
+import Snackbar from '@mui/material/Snackbar';
 
 const Form = ({ oldNote, getNotes }) => {
    
@@ -27,7 +29,7 @@ const Form = ({ oldNote, getNotes }) => {
         let URL = ''
         let params = {}
         
-        console.log("ESTE ES EL VALOR QUE VOY A GUARDAR ->>>>>>>" + priority)
+       
         if (note._id) {
             URL = 'http://localhost:3000/api/notes/' + note._id
             params = {
