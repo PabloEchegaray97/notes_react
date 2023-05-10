@@ -4,23 +4,8 @@ import Typography from '@mui/material/Typography';
 import { useState, useEffect } from 'react';
 import Chip from '@mui/material/Chip';
 
-const Flag_rating = ({ onValueChange, rating, value, oldValue, update}) => {
-    const [ratingValue, setRatingValueInternal] = useState(0);
-    useEffect(() => {
-        setRatingValueInternal(0)
-        onValueChange(0)
-    }, [rating])
-
-    useEffect(() => {
-        setRatingValueInternal(oldValue)
-    },[oldValue])
+const Priority_selector = ({setPriority, priority}) => {
     
-    const handleChipClick = (nvalue) => {
-        
-        setRatingValueInternal(nvalue);
-        onValueChange(nvalue);
-        
-    };
     return (
         <Box>
             <Typography variant="overline" gutterBottom sx={{ display: 'flex', justifyContent: 'center' }}>Priority</Typography>
@@ -28,10 +13,9 @@ const Flag_rating = ({ onValueChange, rating, value, oldValue, update}) => {
                 <Chip
                     label="Low"
                     icon={<FlagIcon />}
-                    color={ratingValue == 'low' ? 'success' : 'default'}
+                    color={priority == 'low' ? 'success' : 'default'}
                     onClick={() => {
-                        handleChipClick('low')
-
+                        setPriority("low")
                     }}
                     clickable={true}
                     sx={{ mr: 2, color: 'white' }}
@@ -39,9 +23,9 @@ const Flag_rating = ({ onValueChange, rating, value, oldValue, update}) => {
                 <Chip
                     label="Medium"
                     icon={<FlagIcon />}
-                    color={ratingValue =='medium' ? 'warning' : 'default'}
+                    color={priority =='medium'  ? 'warning' : 'default'}
                     onClick={() => {
-                        handleChipClick('medium')
+                        setPriority("medium")
                     }}
                     clickable={true}
                     sx={{ mr: 2, color: 'white' }}
@@ -50,9 +34,9 @@ const Flag_rating = ({ onValueChange, rating, value, oldValue, update}) => {
                 <Chip
                     label="High"
                     icon={<FlagIcon />}
-                    color={ratingValue =='high' ? 'error' : 'default'}
+                    color={priority =='high'? 'error' : 'default'}
                     onClick={() => {
-                        handleChipClick('high')
+                        setPriority("high")
                     }}
                     clickable={true}
                     sx={{ color: 'white' }}
@@ -62,4 +46,4 @@ const Flag_rating = ({ onValueChange, rating, value, oldValue, update}) => {
     );
 };
 
-export default Flag_rating;
+export default Priority_selector;

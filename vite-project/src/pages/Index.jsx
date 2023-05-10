@@ -85,12 +85,12 @@ const Index = () => {
                 <Container sx={{ marginTop: '1rem' }}>
                     <Grid container spacing={2}>
                         <Grid item xs={12} sm={6} md={5}>
-                            <Typography gutterBottom variant='h4' sx={{ display: 'flex', justifyContent: 'center' }}>Add note</Typography>
+                            <Typography gutterBottom variant='h5' sx={{ display: 'flex', justifyContent: 'center' }}>Add note</Typography>
                             <Form oldNote={oldNote} getNotes={getNotes} ></Form>
                         </Grid>
                         <Grid item xs={12} sm={6} md={7}>
 
-                            <Typography gutterBottom variant='h4' sx={{ display: 'flex', justifyContent: 'center'}}>Notes</Typography>
+                            <Typography gutterBottom variant='h5' sx={{ display: 'flex', justifyContent: 'center'}}>Notes</Typography>
                                 <TextField
                                     id="filled-search"
                                     label="Search"

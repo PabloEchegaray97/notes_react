@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { Box, TextField, Button, CardContent, Typography, CardActions, Card } from '@mui/material';
-import Alert_info from "./Alert_info";
-import Flag_rating from "./Flag_rating";
+import Priority_selector from "./Priority_selector";
+import Alert_button from "./Alert_button";
 
 const Form = ({ oldNote, getNotes }) => {
-    const [value, setValue] = useState(0)
+   
     const [note, setNote] = useState({
         title: '',
         content: '',
@@ -12,12 +12,7 @@ const Form = ({ oldNote, getNotes }) => {
     })
     const [update, setUpdate] = useState(null)
     const [error, setError] = useState(null)
-    const [rating, setRating] = useState(false)
-
-    const handleChildValueChange = (newValue) => {
-        setValue(newValue)
-    };
-
+    const [priority, setPriority] = useState("")
     const changeHandler = (event) => {
         let newNote = {
             ...note,
@@ -25,17 +20,19 @@ const Form = ({ oldNote, getNotes }) => {
             [event.target.name]: event.target.value,
         }
         setNote(prevNote => ({...prevNote, ...newNote}))
-
+        
     }
 
     const saveNote = async () => {
         let URL = ''
         let params = {}
+        
+        console.log("ESTE ES EL VALOR QUE VOY A GUARDAR ->>>>>>>" + priority)
         if (note._id) {
             URL = 'http://localhost:3000/api/notes/' + note._id
             params = {
                 method: 'PATCH',
-                body: JSON.stringify(note),
+                body: JSON.stringify({...note, priority:priority}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -44,7 +41,7 @@ const Form = ({ oldNote, getNotes }) => {
             URL = 'http://localhost:3000/api/notes/'
             params = {
                 method: 'POST',
-                body: JSON.stringify({...note, priority:value}),
+                body: JSON.stringify({...note, priority:priority}),
                 headers: {
                     'Content-Type': 'application/json'
                 }
@@ -58,7 +55,6 @@ const Form = ({ oldNote, getNotes }) => {
                 throw new Error(response.statusText);
             } else {
                 console.log(response.statusText)
-                setRating(!rating)
                 setUpdate('Note saved')
                 setTimeout(() => setUpdate(null), 2000); // Ocultar el mensaje después de 3 segundos
             }
@@ -76,12 +72,13 @@ const Form = ({ oldNote, getNotes }) => {
             'title': '',
             'content': ''
         })
-
+        setPriority("")
+        
     }
-    
     useEffect(() => {
         setNote({ ...note, ...oldNote })
         setUpdate(null)
+        setPriority(oldNote.priority)
     }, [oldNote])
 
     return (
@@ -116,18 +113,14 @@ const Form = ({ oldNote, getNotes }) => {
                             rows={4}
                         />
                     </Box>
-                    
-                    <Flag_rating name='priority' update={update} value={value} oldValue={oldNote.priority} rating={rating} onValueChange={handleChildValueChange}></Flag_rating>
+                    <Priority_selector setPriority={setPriority} priority={priority} name="priority"></Priority_selector>
                     <Box sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
-                            ? <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}>update</Button>
-                            : <Button size='large' type="submit" sx={{ width: '100%', background: '#4285F4', color: '#fafafa' }}>save</Button>
+                            ? <Alert_button state='update' update={update} style={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}></Alert_button>
+                            : <Alert_button state='save' update={update} style={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#303030', color: '#fafafa' } }}></Alert_button>
                         }
                     </Box>
                 </form>
-
-                {error && <Alert_info severity="warning" color="warning" content={error}></Alert_info>}
-                {update && <Alert_info severity="success" color="success" content={update}></Alert_info>}
             </Box>
         </Box>
     )

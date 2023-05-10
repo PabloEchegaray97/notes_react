@@ -11,7 +11,7 @@ const Note = ({ title, content, id, deleteNote, getNote, time, priority }) => {
                 </Typography>
                 {priority == 'low' && <Chip
                     label="low"
-                    icon={<FlagIcon />}
+                    icon={<FlagIcon/>}
                     color={'success'}
                     size='small'
                     sx={{color: 'white', mb:'1rem'}}
@@ -30,7 +30,7 @@ const Note = ({ title, content, id, deleteNote, getNote, time, priority }) => {
                     size='small'
                     sx={{color: 'white', mb:'1rem'}}
                 />}
-                <Typography variant="subtitle1" color="text.secondary" gutterBottom>
+                <Typography variant="subtitle2" color="text.secondary" gutterBottom>
                     {content}
                 </Typography>
                 <Typography variant="caption" sx={{ color: 'grey' }}>
