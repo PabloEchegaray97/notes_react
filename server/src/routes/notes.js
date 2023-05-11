@@ -54,8 +54,8 @@ router.get('/notes/:id', async (req, res) => {
 })
 
 router.patch('/notes/:id', async (req, res) => {
-    const data = req.body
-    console.log(data)
+    const data = {};
+    const currentDate = new Date();
     try {
         const note = await Note.findOne({
             _id: req.params.id
@@ -66,7 +66,7 @@ router.patch('/notes/:id', async (req, res) => {
         if (req.body.content) {
             note.content = req.body.content;
         }
-        note.time = data.timestamp = new Date().toLocaleTimeString()
+        note.time = data.timestamp = currentDate.toLocaleString(),
         note.priority = req.body.priority;
         note.save();
         res.send(note);

@@ -25,11 +25,11 @@ const Alert_button = ({ state, update }) => {
 
     return (
                 <>
-                    <Button size='large' type="submit" variant='contained' sx={{width:'100%', fontWeight:'600'}} >
+                    <Button size='large' type="submit" variant='contained' sx={{width:'100%', color:'white', bgcolor:'#42a5f5', '&:hover':{bgcolor:'#90caf9', color:'#000000'}}} >
                         {state}
                     </Button>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%', color:'white' }}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%', color:'white'}}>
                             Note saved successfully
                         </Alert>
                     </Snackbar>
