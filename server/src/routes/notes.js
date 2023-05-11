@@ -26,12 +26,14 @@ router.get('/notes', async (req, res) => {
 })
 
 router.post('/notes', async (req, res) => {
-    const data = req.body
+    const data = {};
+    const currentDate = new Date();
+    
     
     const note = new Note({
         'title': req.body.title,
         'content': req.body.content,
-        'time': data.timestamp = new Date().toLocaleTimeString(),
+        'time': data.timestamp = currentDate.toLocaleString(),
         'priority':req.body.priority
     })
 
