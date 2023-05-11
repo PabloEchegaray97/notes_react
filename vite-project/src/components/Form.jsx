@@ -118,8 +118,8 @@ const Form = ({ oldNote, getNotes }) => {
                     <Priority_selector setPriority={setPriority} priority={priority} name="priority"></Priority_selector>
                     <Box sx={{ display: 'flex', justifyContent: 'center', padding: 0 }}>
                         {note._id
-                            ? <Alert_button state='update' update={update} style={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#fafafa', color: '#303030' } }}></Alert_button>
-                            : <Alert_button state='save' update={update} style={{ width: '100%', background: '#4285F4', color: '#fafafa', '&:hover': { bgcolor: '#303030', color: '#fafafa' } }}></Alert_button>
+                            ? <Alert_button state='update' update={update}></Alert_button>
+                            : <Alert_button state='save' update={update}></Alert_button>
                         }
                     </Box>
                 </form>

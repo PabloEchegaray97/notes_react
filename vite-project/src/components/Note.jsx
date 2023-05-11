@@ -1,6 +1,7 @@
 import * as React from 'react';
 import { Box, CardMedia, Button, CardContent, Typography, CardActions, Card, Chip } from '@mui/material';
 import FlagIcon from '@mui/icons-material/Flag';
+import Dialog_button from './Dialog_button'
 const Note = ({ title, content, id, deleteNote, getNote, time, priority }) => {
 
     return (
@@ -38,7 +39,7 @@ const Note = ({ title, content, id, deleteNote, getNote, time, priority }) => {
                 </Typography>
                 <CardActions>
                     <Button size='medium' onClick={(e) => getNote(id)}>edit</Button>
-                    <Button size='medium' onClick={(e) => deleteNote(id)}>delete</Button>
+                    <Dialog_button deleteNote={deleteNote} idNote={id}>delete</Dialog_button>
                 </CardActions>
 
             </CardContent>

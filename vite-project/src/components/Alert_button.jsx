@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 const Alert = React.forwardRef(function Alert(props, ref) {
     return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
 });
-const Alert_button = ({ state, style, update }) => {
+const Alert_button = ({ state, update }) => {
     const [open, setOpen] = React.useState(false);
 
     const handleClose = (event, reason) => {
@@ -25,11 +25,11 @@ const Alert_button = ({ state, style, update }) => {
 
     return (
                 <>
-                    <Button size='large' type="submit" sx={style}>
+                    <Button size='large' type="submit" variant='contained' sx={{width:'100%', fontWeight:'600'}} >
                         {state}
                     </Button>
                     <Snackbar open={open} autoHideDuration={6000} onClose={handleClose}>
-                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+                        <Alert onClose={handleClose} severity="success" sx={{ width: '100%', color:'white' }}>
                             Note saved successfully
                         </Alert>
                     </Snackbar>
